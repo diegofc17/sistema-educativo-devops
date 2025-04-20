@@ -1,0 +1,61 @@
+version: '3.8'
+services:
+
+  eureka-server:
+    build:
+      context: ./eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - red-educativa
+
+  config-server:
+    build:
+      context: ./config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - red-educativa
+    depends_on:
+      - eureka-server
+
+  usuarios-servicio:
+    build:
+      context: ./usuario-servicio
+    ports:
+      - "8082:8082"
+    networks:
+      - red-educativa
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+  asignaturas-servicio:
+    build:
+      context: ./asignaturas-servicio
+    ports:
+      - "8081:8081"
+    networks:
+      - red-educativa
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+
+  matriculas-servicio:
+    build:
+      context: ./matriculas-servicio
+    ports:
+      - "8083:8083"
+    networks:
+      - red-educativa
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+
+networks:
+  red-educativa:

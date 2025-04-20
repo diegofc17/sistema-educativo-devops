@@ -1,0 +1,71 @@
+name: CI/CD Sistema Educativo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-usuarios:
+    name: Construir usuarios-servicio
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: usuario-servicio
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Construir proyecto
+        run: mvn clean install -DskipTests
+
+  build-asignaturas:
+    name: Construir asignaturas-servicio
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: asignaturas-servicio
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Construir proyecto
+        run: mvn clean install -DskipTests
+
+  build-matriculas:
+    name: Construir matriculas-servicio
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: matriculas-servicio
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Construir proyecto
+        run: mvn clean install -DskipTests
+
+  build-eureka:
+    name: Construir eureka-server
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: eureka-server
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Construir proyecto
+        run: mvn clean install -DskipTests

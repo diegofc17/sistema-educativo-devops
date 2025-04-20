@@ -3,11 +3,12 @@ package com.sistemaeducativo.matriculas_servicio.entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "matriculas")
 @Data
 @NoArgsConstructor
 public class Matricula {

@@ -19,6 +19,12 @@ services:
     depends_on:
       - eureka-server
 
+  mongodb:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+
   usuarios-servicio:
     build:
       context: ./usuario-servicio

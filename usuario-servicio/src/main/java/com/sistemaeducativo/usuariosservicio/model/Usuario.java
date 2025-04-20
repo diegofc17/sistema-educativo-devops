@@ -2,12 +2,15 @@ package com.sistemaeducativo.usuariosservicio.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "usuarios")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
